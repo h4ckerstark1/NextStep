@@ -1,0 +1,353 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.career-game {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.game-header {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.game-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%);
+  border-radius: 12px;
+  border: 2px solid #4169E1;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.road {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(90deg,
+    #8B7D5C 0%, #8B7D5C 45%,
+    #FFD700 45%, #FFD700 55%,
+    #8B7D5C 55%, #8B7D5C 100%);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.character {
+  position: absolute;
+  bottom: 70px;
+  left: 30px;
+  font-size: 40px;
+  z-index: 10;
+  animation: bounce 0.6s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.question-mark {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #FF4500;
+  cursor: pointer;
+  border: 3px solid #FF8C00;
+  box-shadow: 0 4px 12px rgba(255, 165, 0, 0.4);
+  transition: all 0.3s ease;
+  animation: pulse 1.5s infinite;
+  z-index: 5;
+}
+
+.question-mark:hover {
+  transform: scale(1.15);
+  box-shadow: 0 6px 20px rgba(255, 165, 0, 0.6);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(255, 165, 0, 0.4);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 4px 20px rgba(255, 165, 0, 0.8);
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.option-btn {
+  padding: 14px 18px;
+  background: white;
+  border: 2px solid #E0E0E0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: left;
+  transition: all 0.2s ease;
+  color: #333;
+  font-weight: 500;
+}
+
+.option-btn:hover {
+  background: #F0F8FF;
+  border-color: #4169E1;
+  transform: translateX(8px);
+  box-shadow: 0 2px 8px rgba(65, 105, 225, 0.2);
+}
+
+.results-content {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+.results-content h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.results-subtitle {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.career-card {
+  background: linear-gradient(135deg, #F5F7FA 0%, #E9ECEF 100%);
+  border-left: 4px solid #4169E1;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.career-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(65, 105, 225, 0.2);
+}
+
+.career-rank {
+  display: inline-block;
+  background: #4169E1;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.career-card h4 {
+  font-size: 18px;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.career-desc {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.career-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail .label {
+  font-size: 12px;
+  color: #999;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.detail span:not(.label) {
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+  background: white;
+  color: #4169E1;
+  border: 2px solid #4169E1;
+}
+
+.btn-secondary:hover {
+  background: #F0F8FF;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .game-container {
+    height: 300px;
+  }
+
+  .character {
+    font-size: 32px;
+    bottom: 50px;
+    left: 15px;
+  }
+
+  .question-mark {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    border-width: 2px;
+  }
+
+  .modal-content,
+  .results-content {
+    padding: 20px;
+  }
+
+  .modal-content h3 {
+    font-size: 18px;
+  }
+
+  .career-details {
+    grid-template-columns: 1fr;
+  }
+
+  .game-stats {
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+  }
+}
